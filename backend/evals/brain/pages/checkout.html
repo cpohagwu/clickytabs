@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Checkout - Peak Outfitters</title><style>
+*{box-sizing:border-box} body{margin:0;font:16px/1.45 system-ui,Segoe UI,Arial,sans-serif;color:#1d2330;background:#f6f7fb}
+header.top{display:flex;align-items:center;gap:24px;height:60px;padding:0 32px;background:#fff;border-bottom:1px solid #e3e6ee}
+header.top .logo{font-weight:700;font-size:20px;color:#3b4cca} header.top nav{display:flex;gap:20px}
+a{color:#3b4cca;text-decoration:none} button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid #c9cedb;background:#fff;padding:8px 16px}
+button.primary{background:#3b4cca;color:#fff;border-color:#3b4cca} main{padding:32px}
+.card{background:#fff;border:1px solid #e3e6ee;border-radius:12px;padding:24px}
+label{display:block;font-weight:600;margin:12px 0 4px} input,select{font:inherit;padding:8px 10px;border:1px solid #c9cedb;border-radius:8px;width:100%}
+</style></head><body><header class="top"><span class="logo">Peak Outfitters</span><nav><a href="#cart">Cart</a></nav></header>
+<main style="display:flex;gap:32px"><form class="card" style="flex:1" onsubmit="return false"><h1 style="margin-top:0">Shipping</h1>
+<label for="name">Full name</label><input id="name"><label for="addr">Address</label><input id="addr">
+<label for="city">City</label><input id="city"></form>
+<aside class="card" style="width:340px"><h2 style="margin-top:0">Order summary</h2><p>Trail Runner 3 - $129.00</p><p>Shipping - $6.00</p>
+<label for="promo">Promo code</label><div style="display:flex;gap:8px"><input id="promo"><button>Apply</button></div>
+<p style="font-weight:700">Total $135.00</p><button class="primary" style="width:100%">Place order</button></aside></main></body></html>

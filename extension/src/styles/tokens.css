@@ -1,0 +1,25 @@
+/*
+ * ClickyTabs design tokens: dark glassmorphism with neon accents. Every custom property is prefixed --cc- because
+ * WXT hoists some rules (@property, @font-face) into the host page, where generic names could collide.
+ */
+:host,
+:root {
+  --cc-bg: rgb(10 12 24 / 0.62);
+  --cc-bg-strong: rgb(10 12 24 / 0.86);
+  --cc-border: rgb(255 255 255 / 0.12);
+  --cc-text: #eef1ff;
+  --cc-text-dim: #a3a9c9;
+  --cc-cyan: #00f0ff;
+  --cc-magenta: #ff2bd6;
+  --cc-violet: #7c5cff;
+  --cc-amber: #f5a524;
+  --cc-red: #ff4d6d;
+  --cc-green: #39f5a0;
+  --cc-blur: 18px;
+  --cc-radius: 16px;
+  --cc-shadow: 0 10px 40px rgb(0 0 0 / 0.45), 0 0 0 1px var(--cc-border);
+  --cc-glow-cyan: 0 0 18px rgb(0 240 255 / 0.55), 0 0 42px rgb(124 92 255 / 0.35);
+  --cc-glow-magenta: 0 0 18px rgb(255 43 214 / 0.6), 0 0 46px rgb(255 43 214 / 0.3);
+  --cc-font: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --cc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

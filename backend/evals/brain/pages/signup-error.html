@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Create account - Lumen</title><style>
+*{box-sizing:border-box} body{margin:0;font:16px/1.45 system-ui,Segoe UI,Arial,sans-serif;color:#1d2330;background:#f6f7fb}
+header.top{display:flex;align-items:center;gap:24px;height:60px;padding:0 32px;background:#fff;border-bottom:1px solid #e3e6ee}
+header.top .logo{font-weight:700;font-size:20px;color:#3b4cca} header.top nav{display:flex;gap:20px}
+a{color:#3b4cca;text-decoration:none} button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid #c9cedb;background:#fff;padding:8px 16px}
+button.primary{background:#3b4cca;color:#fff;border-color:#3b4cca} main{padding:32px}
+.card{background:#fff;border:1px solid #e3e6ee;border-radius:12px;padding:24px}
+label{display:block;font-weight:600;margin:12px 0 4px} input,select{font:inherit;padding:8px 10px;border:1px solid #c9cedb;border-radius:8px;width:100%}
+</style></head><body><header class="top"><span class="logo">Lumen</span><nav><a href="#home">Home</a></nav></header>
+<main style="display:grid;place-items:center"><form class="card" style="width:400px" onsubmit="return false"><h1 style="margin-top:0">Create account</h1>
+<label for="n">Name</label><input id="n" value="Sam">
+<label for="e">Email</label><input id="e" value="sam@example.com">
+<label for="p">Password</label><input id="p" type="password" value="abc" aria-invalid="true" aria-describedby="perr">
+<p id="perr" role="alert" style="color:#c62828;margin:6px 0">Password must be at least 8 characters.</p>
+<button class="primary" style="width:100%">Sign up</button></form></main></body></html>

@@ -1,0 +1,80 @@
+# The same checks as scripts/ci.ps1, on Linux. The e2e job runs the Playwright suite against the real backend on
+# the fake profile (deterministic providers: no models, no API keys).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.13.4"
+      - run: uv sync --locked --compile-bytecode --extra local --extra kokoro --extra anthropic
+      - run: uv run --no-sync ruff check .
+      - run: uv run --no-sync pytest -q
+      - run: uv run --no-sync python -m clicky.protocol.export --check
+      - run: uv lock --check --directory automation-worker
+
+  extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: extension/package-lock.json
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.13.4"
+      - name: Backend for the e2e suite
+        working-directory: backend
+        run: uv sync --locked --compile-bytecode --extra local
+      - name: Install
+        working-directory: extension
+        run: npm ci --no-audit --no-fund
+      - name: Checks, unit tests, build
+        working-directory: extension
+        run: |
+          npm run gen:protocol:check
+          npm run check
+          npm run test
+          npm run build
+          npm run check:manifest
+      - name: Playwright (fake profile)
+        working-directory: extension
+        run: |
+          npx playwright install --with-deps chromium
+          npx playwright test --reporter=line
+      - name: Keep the test results of a failed run
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results
+          path: extension/test-results/
+          retention-days: 7
+
+  docker:
+    # The quick start: `docker compose up --build` builds the backend and writes the extension to extension/dist.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the backend and extension images
+        run: docker compose build backend extension
+      - name: The unpacked extension lands in extension/dist
+        run: |
+          docker compose run --rm extension
+          test -f extension/dist/manifest.json
+          grep -q '"name": "ClickyTabs"' extension/dist/manifest.json

@@ -1,0 +1,46 @@
+# Copy to clicky.toml (same folder; never committed). Environment variables (CLICKY_*) override these values,
+# except [profiles] and [ollama], which are read from this file only.
+
+profile = "local"                        # local | cloud | hybrid | fake
+hardware_tier = "auto"                   # auto | cpu | gpu-4gb | gpu-8gb | gpu-24gb  (`clicky doctor` shows the detected tier)
+allowed_extension_ids = ["fhgliaahcafninaodeelekpdemjkifmf"]   # the pinned dev ID (extension/keys/dev-extension-id.txt)
+# host = "127.0.0.1"
+# port = 8765
+
+[ollama]
+host = "http://127.0.0.1:11434"
+
+# Runner options are per MODEL and shared by every role that uses it (different values would force a reload).
+[ollama.runner."qwen3.5:4b"]
+num_ctx = 24576
+num_batch = 256
+
+# Optional per-profile overrides. Each capability is replaced as a whole (provider, model, options, fallbacks);
+# ignored when profile = "fake". `uv run clicky config show` prints the effective chains.
+#
+# [profiles.local.capabilities.brain]
+# provider = "ollama"
+# model = "qwen3.5:4b"
+# options = { think = false, keep_alive = "30m" }     # top-level /api/chat fields
+# fallbacks = [{ provider = "ollama", model = "qwen2.5vl:3b" }]
+#
+# [profiles.local.capabilities.tts]                    # the gpu-4gb / cpu preset already puts Kokoro first
+# provider = "kokoro"                                  # needs `uv sync --extra kokoro` + `clicky models pull --only kokoro`
+# model = "kokoro-v1.0"
+# options = { voice = "af_heart", speed = 1.0 }
+# fallbacks = [{ provider = "ollama_audio", model = "clicky-lfm3-audio-cpu" }]
+#
+# [profiles.cloud.capabilities.brain]
+# provider = "anthropic"
+# model = "claude-opus-5-5"                            # claude-haiku-5-5: about half the voice latency (MODELS.md)
+# options = { effort = "low" }                         # -> output_config.effort
+#
+# [profiles.cloud.capabilities.codegen]                # writes the scenes the brain asks for
+# provider = "anthropic"
+# model = "claude-opus-5-5"
+# options = { effort = "medium" }
+#
+# [profiles.cloud.capabilities.tts]
+# provider = "elevenlabs"
+# model = "eleven_flash_v2_5"
+# options = { voice_id = "EXAVITQu4vr4xnSDxMaL" }      # free tier: default voices only (this is "Sarah")

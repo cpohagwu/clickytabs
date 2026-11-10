@@ -1,0 +1,13 @@
+# Never in the image: local environments, secrets, the pairing token, models and caches.
+**/.venv
+**/__pycache__
+**/*.pyc
+.clicky
+.env
+*.env
+clicky.toml
+*.pem
+.pytest_cache
+.ruff_cache
+tests
+evals

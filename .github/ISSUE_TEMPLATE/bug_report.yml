@@ -1,0 +1,50 @@
+name: Bug report
+description: Something doesn't work as the docs say it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Please don't paste API keys or the pairing token: `clicky doctor` and `clicky config show` never print them.
+        Security problems go through private reporting instead (Security tab > Report a vulnerability).
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open https://example.com
+        2. Hold Right Ctrl and ask "..."
+        3. ...
+  - type: dropdown
+    id: profile
+    attributes:
+      label: Profile
+      options: [local, cloud, hybrid, fake, not sure]
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Chrome version, GPU and its memory, how you run the backend (source or Docker), commit.
+      placeholder: Windows 11, Chrome 156, RTX 3060 12 GB, from source, a1b2c3d
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `uv run clicky doctor` and `uv run clicky config show`
+      render: text
+  - type: textarea
+    id: logs
+    attributes:
+      label: Backend log or browser console
+      description: The backend's console output around the problem, or errors from the extension's service worker (chrome://extensions > ClickyTabs > service worker).
+      render: text

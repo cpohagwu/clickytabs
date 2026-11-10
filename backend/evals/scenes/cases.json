@@ -1,0 +1,62 @@
+[
+  {
+    "id": "solar-system",
+    "kind": "three",
+    "title": "Solar system",
+    "brief": "The sun in the middle with Mercury, Venus, Earth and Mars on circular orbits at different speeds, inner planets faster; Earth has a small moon. Label each planet."
+  },
+  {
+    "id": "dna",
+    "kind": "three",
+    "title": "DNA double helix",
+    "brief": "A slowly rotating DNA double helix: two colored sugar-phosphate backbones with base-pair rungs between them in four colors. Label the backbone and a base pair."
+  },
+  {
+    "id": "engine",
+    "kind": "three",
+    "title": "Four-stroke engine",
+    "brief": "A cutaway cylinder with a piston on a connecting rod and a rotating crankshaft, plus intake and exhaust valves. Animate the four strokes in a loop and show a label naming the current stroke: intake, compression, power, exhaust."
+  },
+  {
+    "id": "sales-bars",
+    "kind": "three",
+    "title": "Quarterly sales",
+    "brief": "A 3D bar chart of quarterly sales in millions of dollars: Q1 12, Q2 18, Q3 9, Q4 22. Bars on a grid floor, the value above each bar and the quarter in front of it."
+  },
+  {
+    "id": "waves",
+    "kind": "canvas",
+    "title": "Sine and cosine",
+    "brief": "Sine and cosine waves scrolling slowly to the left over labeled x and y axes, sine in cyan and cosine in magenta, with a small legend."
+  },
+  {
+    "id": "bouncing",
+    "kind": "canvas",
+    "title": "Bouncing balls",
+    "brief": "Eight colored balls bouncing inside the area with gravity, losing a little energy on each bounce off the walls and floor; show the number of bounces in a corner."
+  },
+  {
+    "id": "tcp",
+    "kind": "svg",
+    "title": "TCP handshake",
+    "brief": "A sequence diagram of the TCP three-way handshake: Client and Server lifelines, arrows for SYN, SYN-ACK and ACK with example sequence numbers, and a note at the bottom that the connection is established."
+  },
+  {
+    "id": "water-cycle",
+    "kind": "svg",
+    "title": "Water cycle",
+    "brief": "The water cycle: ocean, sun, clouds, a mountain and a river back to the ocean, with curved arrows labeled evaporation, condensation, precipitation and runoff."
+  },
+  {
+    "id": "http-versions",
+    "kind": "html",
+    "title": "HTTP versions",
+    "brief": "A comparison table of HTTP/1.1, HTTP/2 and HTTP/3: transport, multiplexing, header compression, head-of-line blocking and the year each was introduced, with the best value in each row highlighted."
+  },
+  {
+    "id": "apollo",
+    "kind": "html",
+    "title": "Apollo timeline",
+    "brief": "A vertical timeline of the Apollo program's key missions: Apollo 1, 7, 8, 11, 13 and 17, each with its date and one line on what happened."
+  }
+]

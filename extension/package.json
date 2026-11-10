@@ -1,0 +1,45 @@
+{
+  "name": "clickytabs-extension",
+  "description": "ClickyTabs MV3 extension: a voice companion that lives in your tab.",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpohagwu/clickytabs.git",
+    "directory": "extension"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "zip": "wxt zip",
+    "zip:store": "node scripts/zip-store.mjs",
+    "postinstall": "wxt prepare",
+    "check": "svelte-check --tsconfig ./tsconfig.json --fail-on-warnings && tsc --noEmit -p tsconfig.node.json",
+    "test": "vitest run",
+    "test:e2e": "npm run build && playwright test",
+    "gen:protocol": "node scripts/gen-protocol.mjs",
+    "gen:protocol:check": "node scripts/gen-protocol.mjs --check",
+    "icons": "node scripts/gen-icons.mjs",
+    "check:manifest": "node scripts/check-manifest.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@sveltejs/vite-plugin-svelte": "5.1.1",
+    "@types/node": "^22.20.5",
+    "@types/three": "0.187.0",
+    "@wxt-dev/module-svelte": "2.0.5",
+    "happy-dom": "21.0.4",
+    "json-schema-to-typescript": "16.0.0",
+    "svelte": "5.57.3",
+    "svelte-check": "4.7.8",
+    "three": "0.187.0",
+    "tldts": "7.4.19",
+    "typescript": "~6.0.3",
+    "vite": "^6.4.5",
+    "vitest": "5.1.0",
+    "web-ext": "^10.8.0",
+    "wxt": "0.21.5"
+  }
+}

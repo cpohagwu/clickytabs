@@ -1,0 +1,9 @@
+# TLS in front of the backend for remote use (compose profile "remote").
+# A public CLICKY_DOMAIN gets a Let's Encrypt certificate automatically (ports 80 and 443 must reach this machine);
+# "localhost" gets one from Caddy's local CA (for trying it out). The extension then uses wss://<domain>/v1/ws:
+# it refuses to send the pairing token over plain ws:// to anything but this machine.
+{$CLICKY_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy backend:8765
+	header -Server
+}

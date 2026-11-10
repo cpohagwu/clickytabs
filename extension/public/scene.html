@@ -1,0 +1,53 @@
+<!doctype html>
+<!--
+  Sandboxed scene page (manifest "sandbox.pages"; CSP from wxt.config.ts: eval allowed, workers only from blob:, no
+  fetch/XHR/WebSocket). Static on purpose: a classic script from 'self', no inline script, no module scripts (opaque
+  origin + CORS). The stage colors match the companion's glass panel; scene markup may restyle the page.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Scene</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        overflow: hidden;
+        color: #e8ecff;
+        font: 15px/1.5 system-ui, 'Segoe UI', sans-serif;
+        color-scheme: dark;
+      }
+      #stage {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+      }
+      #stage[data-kind='html'] {
+        overflow: auto;
+      }
+      .cc-canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+        outline: none;
+      }
+      #stage > svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .cc-scene-html {
+        box-sizing: border-box;
+        min-height: 100%;
+        padding: 16px 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="scene-harness.js"></script>
+  </body>
+</html>

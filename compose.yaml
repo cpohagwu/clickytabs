@@ -1,0 +1,82 @@
+# ClickyTabs in Docker: the backend, its own Ollama (CPU by default), and a one-off build of the Chrome extension
+# into extension/dist.
+#
+#   docker compose up -d --build                                          # CPU
+#   docker compose -f compose.yaml -f compose.gpu.yaml up -d --build      # NVIDIA GPU for Ollama
+#   CLICKY_DOMAIN=clicky.example.com docker compose --profile remote up -d --build   # + Caddy, TLS for remote use
+#
+# Then: load extension/dist with "Load unpacked" on chrome://extensions, pair it with ws://127.0.0.1:8765/v1/ws (or
+# wss://<CLICKY_DOMAIN>/v1/ws) and the token from `docker compose exec backend clicky token show`, and pull models
+# for the local profile: `docker compose exec backend clicky models pull --profile local` (several GB). Settings
+# (the variables below) can go in a .env file next to this one.
+
+name: clickytabs
+
+services:
+  extension:
+    build:
+      context: ./extension
+    image: clickytabs-extension:0.1.0
+    volumes:
+      - ./extension:/host                  # the build is copied to extension/dist; the container then exits
+    restart: "no"
+
+  ollama:
+    image: ollama/ollama:${OLLAMA_VERSION:-0.40.14}
+    # No published port: only the backend talks to it, and an Ollama already running on this machine stays untouched.
+    environment:
+      OLLAMA_FLASH_ATTENTION: "1"
+      OLLAMA_KEEP_ALIVE: "30m"
+    volumes:
+      - ollama-models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "ps"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    image: clickytabs-backend:0.1.0
+    depends_on:
+      ollama:
+        condition: service_healthy
+    env_file:
+      - path: ./backend/.env            # API keys for the cloud / hybrid profiles; optional
+        required: false
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      # Only this extension may connect: the ID pinned by extension/keys/dev-public-key.b64.
+      CLICKY_ALLOWED_EXTENSION_IDS: ${CLICKY_ALLOWED_EXTENSION_IDS:-fhgliaahcafninaodeelekpdemjkifmf}
+      CLICKY_TRUSTED_HOSTS: 127.0.0.1,localhost,${CLICKY_DOMAIN:-localhost}
+      # No CLICKY_PROFILE: the options page picks the profile. Set it here to pin one.
+    volumes:
+      - clicky-data:/data
+    ports:
+      - "127.0.0.1:${CLICKY_PORT:-8765}:8765"   # this machine only; remote clients go through Caddy (TLS)
+    shm_size: 1gb                              # headless Chromium for browser tasks
+    restart: unless-stopped
+
+  caddy:
+    profiles: [remote]
+    image: caddy:${CADDY_VERSION:-2.10-alpine}
+    depends_on:
+      - backend
+    environment:
+      CLICKY_DOMAIN: ${CLICKY_DOMAIN:-localhost}
+    ports:
+      - "${CADDY_HTTP_PORT:-80}:80"
+      - "${CADDY_HTTPS_PORT:-443}:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    restart: unless-stopped
+
+volumes:
+  ollama-models:
+  clicky-data:
+  caddy-data:
+  caddy-config:

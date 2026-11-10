@@ -1,0 +1,3505 @@
+{
+  "$defs": {
+    "AgentLLMConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "base_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Base Url"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "options": {
+          "additionalProperties": true,
+          "title": "Options",
+          "type": "object"
+        },
+        "provider": {
+          "enum": [
+            "anthropic",
+            "openai_compat",
+            "ollama",
+            "fake"
+          ],
+          "title": "Provider",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "model"
+      ],
+      "title": "AgentLLMConfig",
+      "type": "object"
+    },
+    "ArrowDirective": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "arrow",
+          "default": "arrow",
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "source",
+        "target"
+      ],
+      "title": "ArrowDirective",
+      "type": "object"
+    },
+    "AssistantTextDelta": {
+      "additionalProperties": false,
+      "properties": {
+        "delta": {
+          "title": "Delta",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "assistant.text.delta",
+          "default": "assistant.text.delta",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "delta"
+      ],
+      "title": "AssistantTextDelta",
+      "type": "object"
+    },
+    "AudioChunkEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "data_b64": {
+          "maxLength": 1000000,
+          "title": "Data B64",
+          "type": "string"
+        },
+        "mime": {
+          "default": "audio/webm;codecs=opus",
+          "title": "Mime",
+          "type": "string"
+        },
+        "seq": {
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "audio.chunk",
+          "default": "audio.chunk",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "seq",
+        "data_b64"
+      ],
+      "title": "AudioChunkEvent",
+      "type": "object"
+    },
+    "AudioEnd": {
+      "additionalProperties": false,
+      "properties": {
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "audio.end",
+          "default": "audio.end",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id"
+      ],
+      "title": "AudioEnd",
+      "type": "object"
+    },
+    "BrowserConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_domains": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Domains",
+          "type": "array"
+        },
+        "args": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Args",
+          "type": "array"
+        },
+        "executable_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Executable Path"
+        },
+        "headless": {
+          "default": false,
+          "title": "Headless",
+          "type": "boolean"
+        },
+        "locale": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Locale"
+        },
+        "timezone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timezone"
+        },
+        "user_agent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "User Agent"
+        },
+        "viewport": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Viewport"
+        }
+      },
+      "title": "BrowserConfig",
+      "type": "object"
+    },
+    "CapabilityConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "capability": {
+          "title": "Capability",
+          "type": "string"
+        },
+        "choice": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ProviderChoiceWire"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "providers": {
+          "items": {
+            "$ref": "#/$defs/ProviderOption"
+          },
+          "title": "Providers",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/CapabilityStatus"
+        },
+        "voice_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Voice Key"
+        },
+        "voices": {
+          "items": {
+            "$ref": "#/$defs/VoiceOption"
+          },
+          "title": "Voices",
+          "type": "array"
+        }
+      },
+      "required": [
+        "capability",
+        "status"
+      ],
+      "title": "CapabilityConfig",
+      "type": "object"
+    },
+    "CapabilityStatus": {
+      "additionalProperties": false,
+      "properties": {
+        "capability": {
+          "title": "Capability",
+          "type": "string"
+        },
+        "chain": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Chain",
+          "type": "array"
+        },
+        "hint": {
+          "default": "",
+          "title": "Hint",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "paid",
+            "open",
+            "test"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "reason": {
+          "default": "",
+          "title": "Reason",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "api",
+            "ollama",
+            "huggingface",
+            "local"
+          ],
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "capability",
+        "provider",
+        "kind",
+        "source",
+        "ok"
+      ],
+      "title": "CapabilityStatus",
+      "type": "object"
+    },
+    "CapabilityStatusEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/CapabilityStatus"
+        },
+        "type": {
+          "const": "capability.status",
+          "default": "capability.status",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "status"
+      ],
+      "title": "CapabilityStatusEvent",
+      "type": "object"
+    },
+    "ClearDirective": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "clear",
+          "default": "clear",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ClearDirective",
+      "type": "object"
+    },
+    "ConfigGet": {
+      "additionalProperties": false,
+      "description": "The options page asks for the profile, every capability's provider and what it could switch to.",
+      "properties": {
+        "request_id": {
+          "pattern": "^[A-Za-z0-9_-]{8,64}$",
+          "title": "Request Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "config.get",
+          "default": "config.get",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "request_id"
+      ],
+      "title": "ConfigGet",
+      "type": "object"
+    },
+    "ConfigSet": {
+      "additionalProperties": false,
+      "description": "Switch the profile and/or one capability's provider (for the profile then active) without a restart.\n`reset` drops the options page's choice for `capability` (back to clicky.toml or the preset).",
+      "properties": {
+        "capability": {
+          "anyOf": [
+            {
+              "enum": [
+                "brain",
+                "codegen",
+                "agent_llm",
+                "stt",
+                "tts",
+                "summarizer",
+                "embeddings"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Capability"
+        },
+        "choice": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ProviderChoiceWire"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "profile": {
+          "anyOf": [
+            {
+              "enum": [
+                "local",
+                "cloud",
+                "hybrid"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Profile"
+        },
+        "request_id": {
+          "pattern": "^[A-Za-z0-9_-]{8,64}$",
+          "title": "Request Id",
+          "type": "string"
+        },
+        "reset": {
+          "default": false,
+          "title": "Reset",
+          "type": "boolean"
+        },
+        "type": {
+          "const": "config.set",
+          "default": "config.set",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "request_id"
+      ],
+      "title": "ConfigSet",
+      "type": "object"
+    },
+    "ConfigState": {
+      "additionalProperties": false,
+      "description": "Answer to config.get / config.set (with its request_id), and broadcast to every session after a change.",
+      "properties": {
+        "capabilities": {
+          "items": {
+            "$ref": "#/$defs/CapabilityConfig"
+          },
+          "title": "Capabilities",
+          "type": "array"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error"
+        },
+        "page_budget": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PageBudget"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "profile": {
+          "title": "Profile",
+          "type": "string"
+        },
+        "profile_pinned": {
+          "default": false,
+          "title": "Profile Pinned",
+          "type": "boolean"
+        },
+        "profiles": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Profiles",
+          "type": "array"
+        },
+        "request_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Request Id"
+        },
+        "tier": {
+          "title": "Tier",
+          "type": "string"
+        },
+        "type": {
+          "const": "config.state",
+          "default": "config.state",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "profile",
+        "tier"
+      ],
+      "title": "ConfigState",
+      "type": "object"
+    },
+    "ConsentRequest": {
+      "additionalProperties": false,
+      "description": "The brain proposed a browser task: ask the user. The extension works out the sites itself (cookie scope =\nthe registrable domain of the turn's real tab; a start URL on another site makes the task cross-site).",
+      "properties": {
+        "goal": {
+          "title": "Goal",
+          "type": "string"
+        },
+        "session": {
+          "default": true,
+          "title": "Session",
+          "type": "boolean"
+        },
+        "start_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Url"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "consent.request",
+          "default": "consent.request",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "task_id",
+        "goal"
+      ],
+      "title": "ConsentRequest",
+      "type": "object"
+    },
+    "ConsentResponse": {
+      "additionalProperties": false,
+      "description": "The user's answer in the consent window. `sites` are the registrable domains the task may use, as the\nextension worked them out from the real tab URL and the start URL (the model never decides them).",
+      "properties": {
+        "decision": {
+          "enum": [
+            "allow_once",
+            "always",
+            "deny"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "sites": {
+          "items": {
+            "maxLength": 253,
+            "pattern": "^[a-z0-9-]+(\\.[a-z0-9-]+)+$",
+            "type": "string"
+          },
+          "title": "Sites",
+          "type": "array"
+        },
+        "tab_url": {
+          "anyOf": [
+            {
+              "maxLength": 4096,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tab Url"
+        },
+        "task_id": {
+          "pattern": "^[A-Za-z0-9_-]{8,64}$",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "consent.response",
+          "default": "consent.response",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "decision"
+      ],
+      "title": "ConsentResponse",
+      "type": "object"
+    },
+    "ConversationReset": {
+      "additionalProperties": false,
+      "description": "Forget the conversation so far; the server answers with conversation.started.",
+      "properties": {
+        "type": {
+          "const": "conversation.reset",
+          "default": "conversation.reset",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "ConversationReset",
+      "type": "object"
+    },
+    "ConversationStarted": {
+      "additionalProperties": false,
+      "properties": {
+        "conversation_id": {
+          "title": "Conversation Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "conversation.started",
+          "default": "conversation.started",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "conversation_id"
+      ],
+      "title": "ConversationStarted",
+      "type": "object"
+    },
+    "CookieRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "title": "Domain",
+          "type": "string"
+        },
+        "expires": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires"
+        },
+        "host_only": {
+          "default": false,
+          "title": "Host Only",
+          "type": "boolean"
+        },
+        "http_only": {
+          "default": false,
+          "title": "Http Only",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "partition_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Partition Key"
+        },
+        "path": {
+          "default": "/",
+          "title": "Path",
+          "type": "string"
+        },
+        "same_site": {
+          "anyOf": [
+            {
+              "enum": [
+                "Strict",
+                "Lax",
+                "None"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Same Site"
+        },
+        "secure": {
+          "default": false,
+          "title": "Secure",
+          "type": "boolean"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "domain"
+      ],
+      "title": "CookieRecord",
+      "type": "object"
+    },
+    "ElementMark": {
+      "additionalProperties": false,
+      "properties": {
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^e[1-9][0-9]{0,3}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "level": {
+          "anyOf": [
+            {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Level"
+        },
+        "name": {
+          "default": "",
+          "maxLength": 200,
+          "title": "Name",
+          "type": "string"
+        },
+        "role": {
+          "maxLength": 40,
+          "title": "Role",
+          "type": "string"
+        },
+        "states": {
+          "items": {
+            "enum": [
+              "disabled",
+              "checked",
+              "mixed",
+              "selected",
+              "expanded",
+              "collapsed",
+              "pressed",
+              "required",
+              "readonly",
+              "current"
+            ],
+            "type": "string"
+          },
+          "title": "States",
+          "type": "array"
+        },
+        "tag": {
+          "default": "",
+          "maxLength": 40,
+          "title": "Tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "bbox"
+      ],
+      "title": "ElementMark",
+      "type": "object"
+    },
+    "ErrorEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "default": false,
+          "title": "Retryable",
+          "type": "boolean"
+        },
+        "turn_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Turn Id"
+        },
+        "type": {
+          "const": "error",
+          "default": "error",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "code",
+        "message"
+      ],
+      "title": "ErrorEvent",
+      "type": "object"
+    },
+    "Hello": {
+      "additionalProperties": false,
+      "properties": {
+        "client_version": {
+          "title": "Client Version",
+          "type": "string"
+        },
+        "conversation_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9_-]{8,64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conversation Id"
+        },
+        "extension_id": {
+          "title": "Extension Id",
+          "type": "string"
+        },
+        "features": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Features",
+          "type": "array"
+        },
+        "token": {
+          "title": "Token",
+          "type": "string"
+        },
+        "type": {
+          "const": "hello",
+          "default": "hello",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "token",
+        "client_version",
+        "extension_id"
+      ],
+      "title": "Hello",
+      "type": "object"
+    },
+    "MarkDirective": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "mark",
+          "default": "mark",
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label"
+        },
+        "style": {
+          "default": "circle",
+          "enum": [
+            "circle",
+            "box",
+            "underline",
+            "glow"
+          ],
+          "title": "Style",
+          "type": "string"
+        },
+        "to": {
+          "title": "To",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "to"
+      ],
+      "title": "MarkDirective",
+      "type": "object"
+    },
+    "OpenScene": {
+      "additionalProperties": false,
+      "description": "The scene the companion is showing in front of the page, so a follow-up can change it.",
+      "properties": {
+        "scene_id": {
+          "pattern": "^[A-Za-z0-9_-]{8,64}$",
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "maxLength": 200,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scene_id"
+      ],
+      "title": "OpenScene",
+      "type": "object"
+    },
+    "OriginStorage": {
+      "additionalProperties": false,
+      "properties": {
+        "local_storage": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Local Storage",
+          "type": "object"
+        },
+        "origin": {
+          "title": "Origin",
+          "type": "string"
+        }
+      },
+      "required": [
+        "origin"
+      ],
+      "title": "OriginStorage",
+      "type": "object"
+    },
+    "PageBudget": {
+      "additionalProperties": false,
+      "description": "How much page context the active brain gets. Sent in `welcome`; the extension cuts every snapshot to it.",
+      "properties": {
+        "image_long_edge": {
+          "maximum": 4096,
+          "minimum": 64,
+          "title": "Image Long Edge",
+          "type": "integer"
+        },
+        "image_max_pixels": {
+          "minimum": 4096,
+          "title": "Image Max Pixels",
+          "type": "integer"
+        },
+        "jpeg_quality": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Jpeg Quality",
+          "type": "number"
+        },
+        "max_elements": {
+          "maximum": 400,
+          "minimum": 0,
+          "title": "Max Elements",
+          "type": "integer"
+        },
+        "max_name_chars": {
+          "maximum": 200,
+          "minimum": 8,
+          "title": "Max Name Chars",
+          "type": "integer"
+        },
+        "max_text_chars": {
+          "maximum": 20000,
+          "minimum": 0,
+          "title": "Max Text Chars",
+          "type": "integer"
+        },
+        "vision": {
+          "title": "Vision",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "vision",
+        "image_long_edge",
+        "image_max_pixels",
+        "jpeg_quality",
+        "max_elements",
+        "max_text_chars",
+        "max_name_chars"
+      ],
+      "title": "PageBudget",
+      "type": "object"
+    },
+    "PageContext": {
+      "additionalProperties": false,
+      "properties": {
+        "elements": {
+          "items": {
+            "$ref": "#/$defs/ElementMark"
+          },
+          "maxItems": 400,
+          "title": "Elements",
+          "type": "array"
+        },
+        "scene": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/OpenScene"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "screenshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Screenshot"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "selection": {
+          "anyOf": [
+            {
+              "maxLength": 4000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selection"
+        },
+        "text_excerpt": {
+          "anyOf": [
+            {
+              "maxLength": 20000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text Excerpt"
+        },
+        "title": {
+          "default": "",
+          "maxLength": 500,
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "maxLength": 4096,
+          "title": "Url",
+          "type": "string"
+        },
+        "viewport": {
+          "$ref": "#/$defs/Viewport"
+        }
+      },
+      "required": [
+        "url",
+        "viewport"
+      ],
+      "title": "PageContext",
+      "type": "object"
+    },
+    "PathDirective": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "path",
+          "default": "path",
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label"
+        },
+        "points": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Points",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "points"
+      ],
+      "title": "PathDirective",
+      "type": "object"
+    },
+    "Ping": {
+      "additionalProperties": false,
+      "properties": {
+        "t": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "T"
+        },
+        "type": {
+          "const": "ping",
+          "default": "ping",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "Ping",
+      "type": "object"
+    },
+    "PlaybackEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "at_ms": {
+          "title": "At Ms",
+          "type": "number"
+        },
+        "seq": {
+          "title": "Seq",
+          "type": "integer"
+        },
+        "state": {
+          "enum": [
+            "started",
+            "ended",
+            "interrupted"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "playback.event",
+          "default": "playback.event",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "seq",
+        "state",
+        "at_ms"
+      ],
+      "title": "PlaybackEvent",
+      "type": "object"
+    },
+    "PointDirective": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "point",
+          "default": "point",
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label"
+        },
+        "to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "To"
+        },
+        "x": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "X"
+        },
+        "y": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Y"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "PointDirective",
+      "type": "object"
+    },
+    "Pong": {
+      "additionalProperties": false,
+      "properties": {
+        "t": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "T"
+        },
+        "type": {
+          "const": "pong",
+          "default": "pong",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "Pong",
+      "type": "object"
+    },
+    "ProviderChoiceWire": {
+      "additionalProperties": false,
+      "description": "One provider for one capability, as the options page sets it.",
+      "properties": {
+        "model": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "options": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "title": "Options",
+          "type": "object"
+        },
+        "provider": {
+          "pattern": "^[a-z][a-z0-9_]{0,31}$",
+          "title": "Provider",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider"
+      ],
+      "title": "ProviderChoiceWire",
+      "type": "object"
+    },
+    "ProviderOption": {
+      "additionalProperties": false,
+      "description": "A provider the options page can pick for a capability. `available` = its package is installed and its API\nkey is set (health is only known once it is chosen); `models` = local Ollama models, when relevant.",
+      "properties": {
+        "available": {
+          "title": "Available",
+          "type": "boolean"
+        },
+        "default_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default Model"
+        },
+        "kind": {
+          "enum": [
+            "paid",
+            "open",
+            "test"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "models": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Models",
+          "type": "array"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "needs_model": {
+          "default": true,
+          "title": "Needs Model",
+          "type": "boolean"
+        },
+        "reason": {
+          "default": "",
+          "title": "Reason",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "api",
+            "ollama",
+            "huggingface",
+            "local"
+          ],
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "source",
+        "available"
+      ],
+      "title": "ProviderOption",
+      "type": "object"
+    },
+    "SceneBuilding": {
+      "additionalProperties": false,
+      "description": "The brain asked for a scene and the codegen model is writing it: show the stage with a placeholder.",
+      "properties": {
+        "kind": {
+          "enum": [
+            "three",
+            "canvas",
+            "svg",
+            "html"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "scene_id": {
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "scene.building",
+          "default": "scene.building",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "scene_id",
+        "kind"
+      ],
+      "title": "SceneBuilding",
+      "type": "object"
+    },
+    "SceneFailed": {
+      "additionalProperties": false,
+      "description": "No scene this time: the codegen model failed, or the repaired code still didn't render.",
+      "properties": {
+        "error": {
+          "title": "Error",
+          "type": "string"
+        },
+        "scene_id": {
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "scene.failed",
+          "default": "scene.failed",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "scene_id",
+        "error"
+      ],
+      "title": "SceneFailed",
+      "type": "object"
+    },
+    "SceneRender": {
+      "additionalProperties": false,
+      "description": "Code for the scene sandbox; attempt 2 is the automatic repair after a failed scene.result.",
+      "properties": {
+        "attempt": {
+          "default": 1,
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "codegen_ms": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Codegen Ms"
+        },
+        "kind": {
+          "enum": [
+            "three",
+            "canvas",
+            "svg",
+            "html"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "scene_id": {
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "scene.render",
+          "default": "scene.render",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "scene_id",
+        "kind",
+        "code"
+      ],
+      "title": "SceneRender",
+      "type": "object"
+    },
+    "SceneResult": {
+      "additionalProperties": false,
+      "description": "The sandbox ran a scene.render: it drew something (ok), or why not. A failure gets one repair attempt.",
+      "properties": {
+        "attempt": {
+          "default": 1,
+          "maximum": 10,
+          "minimum": 1,
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error"
+        },
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "scene_id": {
+          "pattern": "^[A-Za-z0-9_-]{8,64}$",
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "scene.result",
+          "default": "scene.result",
+          "title": "Type",
+          "type": "string"
+        },
+        "unavailable": {
+          "default": false,
+          "title": "Unavailable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "type",
+        "scene_id",
+        "ok"
+      ],
+      "title": "SceneResult",
+      "type": "object"
+    },
+    "Screenshot": {
+      "additionalProperties": false,
+      "properties": {
+        "data_b64": {
+          "maxLength": 6000000,
+          "title": "Data B64",
+          "type": "string"
+        },
+        "height": {
+          "maximum": 8192,
+          "minimum": 1,
+          "title": "Height",
+          "type": "integer"
+        },
+        "mime": {
+          "default": "image/jpeg",
+          "enum": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ],
+          "title": "Mime",
+          "type": "string"
+        },
+        "width": {
+          "maximum": 8192,
+          "minimum": 1,
+          "title": "Width",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "data_b64",
+        "width",
+        "height"
+      ],
+      "title": "Screenshot",
+      "type": "object"
+    },
+    "ScrollDirective": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "scroll",
+          "default": "scroll",
+          "title": "Kind",
+          "type": "string"
+        },
+        "to": {
+          "title": "To",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "to"
+      ],
+      "title": "ScrollDirective",
+      "type": "object"
+    },
+    "SessionBundle": {
+      "additionalProperties": false,
+      "description": "The user's login for the task's site, collected by the extension after consent: cookies of the tab's\nregistrable domain only, plus the tab origin's localStorage.",
+      "properties": {
+        "cookies": {
+          "items": {
+            "$ref": "#/$defs/CookieRecord"
+          },
+          "maxItems": 500,
+          "title": "Cookies",
+          "type": "array"
+        },
+        "locale": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Locale"
+        },
+        "origins": {
+          "items": {
+            "$ref": "#/$defs/OriginStorage"
+          },
+          "title": "Origins",
+          "type": "array"
+        },
+        "site": {
+          "maxLength": 253,
+          "pattern": "^[a-z0-9-]+(\\.[a-z0-9-]+)+$",
+          "title": "Site",
+          "type": "string"
+        },
+        "task_id": {
+          "pattern": "^[A-Za-z0-9_-]{8,64}$",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "timezone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timezone"
+        },
+        "type": {
+          "const": "session.bundle",
+          "default": "session.bundle",
+          "title": "Type",
+          "type": "string"
+        },
+        "user_agent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "User Agent"
+        },
+        "viewport": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Viewport"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "site"
+      ],
+      "title": "SessionBundle",
+      "type": "object"
+    },
+    "SetupProgress": {
+      "additionalProperties": false,
+      "properties": {
+        "completed": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Completed"
+        },
+        "item": {
+          "title": "Item",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "total": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total"
+        },
+        "type": {
+          "const": "setup.progress",
+          "default": "setup.progress",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "item",
+        "status"
+      ],
+      "title": "SetupProgress",
+      "type": "object"
+    },
+    "SpeechAudio": {
+      "additionalProperties": false,
+      "properties": {
+        "data_b64": {
+          "title": "Data B64",
+          "type": "string"
+        },
+        "index": {
+          "minimum": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "seq": {
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "speech.audio",
+          "default": "speech.audio",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "seq",
+        "index",
+        "data_b64"
+      ],
+      "title": "SpeechAudio",
+      "type": "object"
+    },
+    "SpeechSegment": {
+      "additionalProperties": false,
+      "description": "Announces one spoken segment; its audio follows as speech.audio chunks, then speech.segment.end.",
+      "properties": {
+        "directives": {
+          "items": {
+            "$ref": "#/$defs/TimedDirective"
+          },
+          "title": "Directives",
+          "type": "array"
+        },
+        "mime": {
+          "title": "Mime",
+          "type": "string"
+        },
+        "sample_rate": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sample Rate"
+        },
+        "seq": {
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "speech.segment",
+          "default": "speech.segment",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "seq",
+        "text",
+        "mime"
+      ],
+      "title": "SpeechSegment",
+      "type": "object"
+    },
+    "SpeechSegmentEnd": {
+      "additionalProperties": false,
+      "properties": {
+        "char_times_ms": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Char Times Ms"
+        },
+        "duration_ms": {
+          "minimum": 0,
+          "title": "Duration Ms",
+          "type": "number"
+        },
+        "seq": {
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "speech.segment.end",
+          "default": "speech.segment.end",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "seq",
+        "duration_ms"
+      ],
+      "title": "SpeechSegmentEnd",
+      "type": "object"
+    },
+    "TaskCancel": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "pattern": "^[A-Za-z0-9_-]{8,64}$",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "task.cancel",
+          "default": "task.cancel",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id"
+      ],
+      "title": "TaskCancel",
+      "type": "object"
+    },
+    "TaskConfirmRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "question": {
+          "title": "Question",
+          "type": "string"
+        },
+        "request_id": {
+          "title": "Request Id",
+          "type": "string"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "task.confirm.request",
+          "default": "task.confirm.request",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "request_id",
+        "question"
+      ],
+      "title": "TaskConfirmRequest",
+      "type": "object"
+    },
+    "TaskConfirmResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "approved": {
+          "title": "Approved",
+          "type": "boolean"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "maxLength": 300,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "request_id": {
+          "maxLength": 64,
+          "title": "Request Id",
+          "type": "string"
+        },
+        "task_id": {
+          "pattern": "^[A-Za-z0-9_-]{8,64}$",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "task.confirm.response",
+          "default": "task.confirm.response",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "request_id",
+        "approved"
+      ],
+      "title": "TaskConfirmResponse",
+      "type": "object"
+    },
+    "TaskDone": {
+      "additionalProperties": false,
+      "properties": {
+        "final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Final Url"
+        },
+        "success": {
+          "title": "Success",
+          "type": "boolean"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "task.done",
+          "default": "task.done",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "success",
+        "summary"
+      ],
+      "title": "TaskDone",
+      "type": "object"
+    },
+    "TaskLimits": {
+      "additionalProperties": false,
+      "properties": {
+        "confirm_timeout_s": {
+          "default": 120.0,
+          "title": "Confirm Timeout S",
+          "type": "number"
+        },
+        "max_steps": {
+          "default": 40,
+          "title": "Max Steps",
+          "type": "integer"
+        },
+        "step_timeout_s": {
+          "default": 300.0,
+          "title": "Step Timeout S",
+          "type": "number"
+        }
+      },
+      "title": "TaskLimits",
+      "type": "object"
+    },
+    "TaskStarted": {
+      "additionalProperties": false,
+      "properties": {
+        "cookies": {
+          "default": 0,
+          "title": "Cookies",
+          "type": "integer"
+        },
+        "goal": {
+          "title": "Goal",
+          "type": "string"
+        },
+        "sites": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sites",
+          "type": "array"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "task.started",
+          "default": "task.started",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "goal"
+      ],
+      "title": "TaskStarted",
+      "type": "object"
+    },
+    "TaskStep": {
+      "additionalProperties": false,
+      "properties": {
+        "action_text": {
+          "title": "Action Text",
+          "type": "string"
+        },
+        "n": {
+          "title": "N",
+          "type": "integer"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "thumb_b64": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Thumb B64"
+        },
+        "type": {
+          "const": "task.step",
+          "default": "task.step",
+          "title": "Type",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "n",
+        "action_text"
+      ],
+      "title": "TaskStep",
+      "type": "object"
+    },
+    "TimedDirective": {
+      "additionalProperties": false,
+      "properties": {
+        "at_char": {
+          "minimum": 0,
+          "title": "At Char",
+          "type": "integer"
+        },
+        "directive": {
+          "discriminator": {
+            "mapping": {
+              "arrow": "#/$defs/ArrowDirective",
+              "clear": "#/$defs/ClearDirective",
+              "mark": "#/$defs/MarkDirective",
+              "path": "#/$defs/PathDirective",
+              "point": "#/$defs/PointDirective",
+              "scroll": "#/$defs/ScrollDirective"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PointDirective"
+            },
+            {
+              "$ref": "#/$defs/MarkDirective"
+            },
+            {
+              "$ref": "#/$defs/ArrowDirective"
+            },
+            {
+              "$ref": "#/$defs/PathDirective"
+            },
+            {
+              "$ref": "#/$defs/ScrollDirective"
+            },
+            {
+              "$ref": "#/$defs/ClearDirective"
+            }
+          ],
+          "title": "Directive"
+        }
+      },
+      "required": [
+        "at_char",
+        "directive"
+      ],
+      "title": "TimedDirective",
+      "type": "object"
+    },
+    "TranscriptFinal": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "transcript.final",
+          "default": "transcript.final",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "text"
+      ],
+      "title": "TranscriptFinal",
+      "type": "object"
+    },
+    "TranscriptPartial": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "transcript.partial",
+          "default": "transcript.partial",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "text"
+      ],
+      "title": "TranscriptPartial",
+      "type": "object"
+    },
+    "TurnCancel": {
+      "additionalProperties": false,
+      "properties": {
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.cancel",
+          "default": "turn.cancel",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id"
+      ],
+      "title": "TurnCancel",
+      "type": "object"
+    },
+    "TurnDone": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail"
+        },
+        "metrics": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "number"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Metrics"
+        },
+        "reason": {
+          "enum": [
+            "end",
+            "cancelled",
+            "error",
+            "refusal",
+            "max_tokens"
+          ],
+          "title": "Reason",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.done",
+          "default": "turn.done",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "reason"
+      ],
+      "title": "TurnDone",
+      "type": "object"
+    },
+    "TurnStart": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "text",
+            "voice"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PageContext"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tab_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tab Id"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.start",
+          "default": "turn.start",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "mode"
+      ],
+      "title": "TurnStart",
+      "type": "object"
+    },
+    "TurnState": {
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": [
+            "listening",
+            "transcribing",
+            "thinking",
+            "speaking",
+            "acting",
+            "idle"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.state",
+          "default": "turn.state",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "state"
+      ],
+      "title": "TurnState",
+      "type": "object"
+    },
+    "Viewport": {
+      "additionalProperties": false,
+      "properties": {
+        "dpr": {
+          "default": 1.0,
+          "exclusiveMinimum": 0,
+          "title": "Dpr",
+          "type": "number"
+        },
+        "height": {
+          "minimum": 1,
+          "title": "Height",
+          "type": "integer"
+        },
+        "scroll_x": {
+          "default": 0.0,
+          "title": "Scroll X",
+          "type": "number"
+        },
+        "scroll_y": {
+          "default": 0.0,
+          "title": "Scroll Y",
+          "type": "number"
+        },
+        "width": {
+          "minimum": 1,
+          "title": "Width",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "title": "Viewport",
+      "type": "object"
+    },
+    "VisualDirectiveEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "directive": {
+          "discriminator": {
+            "mapping": {
+              "arrow": "#/$defs/ArrowDirective",
+              "clear": "#/$defs/ClearDirective",
+              "mark": "#/$defs/MarkDirective",
+              "path": "#/$defs/PathDirective",
+              "point": "#/$defs/PointDirective",
+              "scroll": "#/$defs/ScrollDirective"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PointDirective"
+            },
+            {
+              "$ref": "#/$defs/MarkDirective"
+            },
+            {
+              "$ref": "#/$defs/ArrowDirective"
+            },
+            {
+              "$ref": "#/$defs/PathDirective"
+            },
+            {
+              "$ref": "#/$defs/ScrollDirective"
+            },
+            {
+              "$ref": "#/$defs/ClearDirective"
+            }
+          ],
+          "title": "Directive"
+        },
+        "turn_id": {
+          "title": "Turn Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "visual.directive",
+          "default": "visual.directive",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "turn_id",
+        "directive"
+      ],
+      "title": "VisualDirectiveEvent",
+      "type": "object"
+    },
+    "VoiceOption": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "VoiceOption",
+      "type": "object"
+    },
+    "Welcome": {
+      "additionalProperties": false,
+      "properties": {
+        "capabilities": {
+          "items": {
+            "$ref": "#/$defs/CapabilityStatus"
+          },
+          "title": "Capabilities",
+          "type": "array"
+        },
+        "conversation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Conversation Id"
+        },
+        "conversation_turns": {
+          "default": 0,
+          "title": "Conversation Turns",
+          "type": "integer"
+        },
+        "page_budget": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PageBudget"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "profile": {
+          "title": "Profile",
+          "type": "string"
+        },
+        "server_version": {
+          "title": "Server Version",
+          "type": "string"
+        },
+        "session_id": {
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "welcome",
+          "default": "welcome",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "session_id",
+        "server_version",
+        "profile"
+      ],
+      "title": "Welcome",
+      "type": "object"
+    },
+    "WorkerConfirmRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "question": {
+          "title": "Question",
+          "type": "string"
+        },
+        "request_id": {
+          "title": "Request Id",
+          "type": "string"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "confirm.request",
+          "default": "confirm.request",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "request_id",
+        "question"
+      ],
+      "title": "WorkerConfirmRequest",
+      "type": "object"
+    },
+    "WorkerConfirmResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "approved": {
+          "title": "Approved",
+          "type": "boolean"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "request_id": {
+          "title": "Request Id",
+          "type": "string"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "confirm.response",
+          "default": "confirm.response",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "request_id",
+        "approved"
+      ],
+      "title": "WorkerConfirmResponse",
+      "type": "object"
+    },
+    "WorkerLog": {
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "default": "info",
+          "enum": [
+            "debug",
+            "info",
+            "warning",
+            "error"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "type": {
+          "const": "log",
+          "default": "log",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "message"
+      ],
+      "title": "WorkerLog",
+      "type": "object"
+    },
+    "WorkerPing": {
+      "additionalProperties": false,
+      "properties": {
+        "nonce": {
+          "title": "Nonce",
+          "type": "string"
+        },
+        "payload": {
+          "default": "",
+          "title": "Payload",
+          "type": "string"
+        },
+        "type": {
+          "const": "ping",
+          "default": "ping",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "nonce"
+      ],
+      "title": "WorkerPing",
+      "type": "object"
+    },
+    "WorkerPong": {
+      "additionalProperties": false,
+      "properties": {
+        "nonce": {
+          "title": "Nonce",
+          "type": "string"
+        },
+        "payload": {
+          "default": "",
+          "title": "Payload",
+          "type": "string"
+        },
+        "type": {
+          "const": "pong",
+          "default": "pong",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "nonce"
+      ],
+      "title": "WorkerPong",
+      "type": "object"
+    },
+    "WorkerReady": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "stub",
+            "live"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "type": {
+          "const": "ready",
+          "default": "ready",
+          "title": "Type",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "version",
+        "mode"
+      ],
+      "title": "WorkerReady",
+      "type": "object"
+    },
+    "WorkerShutdown": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "shutdown",
+          "default": "shutdown",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "WorkerShutdown",
+      "type": "object"
+    },
+    "WorkerTaskCancel": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "task.cancel",
+          "default": "task.cancel",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id"
+      ],
+      "title": "WorkerTaskCancel",
+      "type": "object"
+    },
+    "WorkerTaskDone": {
+      "additionalProperties": false,
+      "properties": {
+        "final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Final Url"
+        },
+        "success": {
+          "title": "Success",
+          "type": "boolean"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "task.done",
+          "default": "task.done",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "success",
+        "summary"
+      ],
+      "title": "WorkerTaskDone",
+      "type": "object"
+    },
+    "WorkerTaskError": {
+      "additionalProperties": false,
+      "properties": {
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "task_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Task Id"
+        },
+        "type": {
+          "const": "task.error",
+          "default": "task.error",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "message"
+      ],
+      "title": "WorkerTaskError",
+      "type": "object"
+    },
+    "WorkerTaskStart": {
+      "additionalProperties": false,
+      "properties": {
+        "browser": {
+          "$ref": "#/$defs/BrowserConfig"
+        },
+        "goal": {
+          "title": "Goal",
+          "type": "string"
+        },
+        "limits": {
+          "$ref": "#/$defs/TaskLimits"
+        },
+        "llm": {
+          "$ref": "#/$defs/AgentLLMConfig"
+        },
+        "start_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Url"
+        },
+        "storage_state": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Storage State"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "task.start",
+          "default": "task.start",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "goal",
+        "llm"
+      ],
+      "title": "WorkerTaskStart",
+      "type": "object"
+    },
+    "WorkerTaskStep": {
+      "additionalProperties": false,
+      "properties": {
+        "action_text": {
+          "title": "Action Text",
+          "type": "string"
+        },
+        "n": {
+          "title": "N",
+          "type": "integer"
+        },
+        "task_id": {
+          "title": "Task Id",
+          "type": "string"
+        },
+        "thumb_b64": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Thumb B64"
+        },
+        "type": {
+          "const": "task.step",
+          "default": "task.step",
+          "title": "Type",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "type",
+        "task_id",
+        "n",
+        "action_text"
+      ],
+      "title": "WorkerTaskStep",
+      "type": "object"
+    }
+  },
+  "description": "Bundle model: one property per message family so every model lands in $defs.",
+  "properties": {
+    "client": {
+      "discriminator": {
+        "mapping": {
+          "audio.chunk": "#/$defs/AudioChunkEvent",
+          "audio.end": "#/$defs/AudioEnd",
+          "config.get": "#/$defs/ConfigGet",
+          "config.set": "#/$defs/ConfigSet",
+          "consent.response": "#/$defs/ConsentResponse",
+          "conversation.reset": "#/$defs/ConversationReset",
+          "hello": "#/$defs/Hello",
+          "ping": "#/$defs/Ping",
+          "playback.event": "#/$defs/PlaybackEvent",
+          "scene.result": "#/$defs/SceneResult",
+          "session.bundle": "#/$defs/SessionBundle",
+          "task.cancel": "#/$defs/TaskCancel",
+          "task.confirm.response": "#/$defs/TaskConfirmResponse",
+          "turn.cancel": "#/$defs/TurnCancel",
+          "turn.start": "#/$defs/TurnStart"
+        },
+        "propertyName": "type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Hello"
+        },
+        {
+          "$ref": "#/$defs/Ping"
+        },
+        {
+          "$ref": "#/$defs/TurnStart"
+        },
+        {
+          "$ref": "#/$defs/TurnCancel"
+        },
+        {
+          "$ref": "#/$defs/AudioChunkEvent"
+        },
+        {
+          "$ref": "#/$defs/AudioEnd"
+        },
+        {
+          "$ref": "#/$defs/PlaybackEvent"
+        },
+        {
+          "$ref": "#/$defs/SceneResult"
+        },
+        {
+          "$ref": "#/$defs/ConsentResponse"
+        },
+        {
+          "$ref": "#/$defs/SessionBundle"
+        },
+        {
+          "$ref": "#/$defs/TaskConfirmResponse"
+        },
+        {
+          "$ref": "#/$defs/TaskCancel"
+        },
+        {
+          "$ref": "#/$defs/ConversationReset"
+        },
+        {
+          "$ref": "#/$defs/ConfigGet"
+        },
+        {
+          "$ref": "#/$defs/ConfigSet"
+        }
+      ],
+      "title": "Client"
+    },
+    "server": {
+      "discriminator": {
+        "mapping": {
+          "assistant.text.delta": "#/$defs/AssistantTextDelta",
+          "capability.status": "#/$defs/CapabilityStatusEvent",
+          "config.state": "#/$defs/ConfigState",
+          "consent.request": "#/$defs/ConsentRequest",
+          "conversation.started": "#/$defs/ConversationStarted",
+          "error": "#/$defs/ErrorEvent",
+          "pong": "#/$defs/Pong",
+          "scene.building": "#/$defs/SceneBuilding",
+          "scene.failed": "#/$defs/SceneFailed",
+          "scene.render": "#/$defs/SceneRender",
+          "setup.progress": "#/$defs/SetupProgress",
+          "speech.audio": "#/$defs/SpeechAudio",
+          "speech.segment": "#/$defs/SpeechSegment",
+          "speech.segment.end": "#/$defs/SpeechSegmentEnd",
+          "task.confirm.request": "#/$defs/TaskConfirmRequest",
+          "task.done": "#/$defs/TaskDone",
+          "task.started": "#/$defs/TaskStarted",
+          "task.step": "#/$defs/TaskStep",
+          "transcript.final": "#/$defs/TranscriptFinal",
+          "transcript.partial": "#/$defs/TranscriptPartial",
+          "turn.done": "#/$defs/TurnDone",
+          "turn.state": "#/$defs/TurnState",
+          "visual.directive": "#/$defs/VisualDirectiveEvent",
+          "welcome": "#/$defs/Welcome"
+        },
+        "propertyName": "type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Welcome"
+        },
+        {
+          "$ref": "#/$defs/Pong"
+        },
+        {
+          "$ref": "#/$defs/ErrorEvent"
+        },
+        {
+          "$ref": "#/$defs/TurnState"
+        },
+        {
+          "$ref": "#/$defs/AssistantTextDelta"
+        },
+        {
+          "$ref": "#/$defs/TurnDone"
+        },
+        {
+          "$ref": "#/$defs/CapabilityStatusEvent"
+        },
+        {
+          "$ref": "#/$defs/TranscriptPartial"
+        },
+        {
+          "$ref": "#/$defs/TranscriptFinal"
+        },
+        {
+          "$ref": "#/$defs/SpeechSegment"
+        },
+        {
+          "$ref": "#/$defs/SpeechAudio"
+        },
+        {
+          "$ref": "#/$defs/SpeechSegmentEnd"
+        },
+        {
+          "$ref": "#/$defs/VisualDirectiveEvent"
+        },
+        {
+          "$ref": "#/$defs/SceneBuilding"
+        },
+        {
+          "$ref": "#/$defs/SceneRender"
+        },
+        {
+          "$ref": "#/$defs/SceneFailed"
+        },
+        {
+          "$ref": "#/$defs/ConsentRequest"
+        },
+        {
+          "$ref": "#/$defs/TaskStarted"
+        },
+        {
+          "$ref": "#/$defs/TaskStep"
+        },
+        {
+          "$ref": "#/$defs/TaskConfirmRequest"
+        },
+        {
+          "$ref": "#/$defs/TaskDone"
+        },
+        {
+          "$ref": "#/$defs/SetupProgress"
+        },
+        {
+          "$ref": "#/$defs/ConversationStarted"
+        },
+        {
+          "$ref": "#/$defs/ConfigState"
+        }
+      ],
+      "title": "Server"
+    },
+    "worker_command": {
+      "discriminator": {
+        "mapping": {
+          "confirm.response": "#/$defs/WorkerConfirmResponse",
+          "ping": "#/$defs/WorkerPing",
+          "shutdown": "#/$defs/WorkerShutdown",
+          "task.cancel": "#/$defs/WorkerTaskCancel",
+          "task.start": "#/$defs/WorkerTaskStart"
+        },
+        "propertyName": "type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/WorkerPing"
+        },
+        {
+          "$ref": "#/$defs/WorkerTaskStart"
+        },
+        {
+          "$ref": "#/$defs/WorkerTaskCancel"
+        },
+        {
+          "$ref": "#/$defs/WorkerConfirmResponse"
+        },
+        {
+          "$ref": "#/$defs/WorkerShutdown"
+        }
+      ],
+      "title": "Worker Command"
+    },
+    "worker_event": {
+      "discriminator": {
+        "mapping": {
+          "confirm.request": "#/$defs/WorkerConfirmRequest",
+          "log": "#/$defs/WorkerLog",
+          "pong": "#/$defs/WorkerPong",
+          "ready": "#/$defs/WorkerReady",
+          "task.done": "#/$defs/WorkerTaskDone",
+          "task.error": "#/$defs/WorkerTaskError",
+          "task.step": "#/$defs/WorkerTaskStep"
+        },
+        "propertyName": "type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/WorkerReady"
+        },
+        {
+          "$ref": "#/$defs/WorkerPong"
+        },
+        {
+          "$ref": "#/$defs/WorkerTaskStep"
+        },
+        {
+          "$ref": "#/$defs/WorkerConfirmRequest"
+        },
+        {
+          "$ref": "#/$defs/WorkerTaskDone"
+        },
+        {
+          "$ref": "#/$defs/WorkerTaskError"
+        },
+        {
+          "$ref": "#/$defs/WorkerLog"
+        }
+      ],
+      "title": "Worker Event"
+    }
+  },
+  "required": [
+    "client",
+    "server",
+    "worker_command",
+    "worker_event"
+  ],
+  "title": "ClickyTabsProtocol",
+  "type": "object"
+}
