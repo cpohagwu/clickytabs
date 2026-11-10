@@ -18,13 +18,15 @@ import { debugState, expect, openFixture, pair, popup, test, voiceTurns } from '
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const chrome: any;
 
+// The cue comes first: the page-text walk stops after a few milliseconds (snapshot.ts), and on a slow CI machine
+// it may not reach the end of the page.
 function page(cue: string): string {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Journey</title></head>
 <body style="margin:0;font:16px sans-serif"><main style="padding:40px">
+<p style="color:#999">Fake brain cue: ${cue}</p>
 <h1>Popover API</h1>
 <p><button>Show popover</button> <button>Hide popover</button></p>
-<p>The Popover API shows content on top of other page content.</p>
-<p style="color:#999">Fake brain cue: ${cue}</p></main></body></html>`;
+<p>The Popover API shows content on top of other page content.</p></main></body></html>`;
 }
 
 /** Hold Right Ctrl like a person asking one question, and wait for the voice turn to end. */

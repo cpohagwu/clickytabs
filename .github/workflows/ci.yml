@@ -76,5 +76,4 @@ jobs:
       - name: The unpacked extension lands in extension/dist
         run: |
           docker compose run --rm extension
-          test -f extension/dist/manifest.json
-          grep -q '"name": "ClickyTabs"' extension/dist/manifest.json
+          node -e "const m = require('./extension/dist/manifest.json'); if (m.name !== 'ClickyTabs') process.exit(1)"
